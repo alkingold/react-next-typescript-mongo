@@ -16,8 +16,11 @@ export const connectToDB = async () => {
 			{
 				dbName: 'tasks',
 			} as ConnectOptions
-
 		)
+
+		isConnected = true
+
+		console.log('MongoDB connected')
 	} catch (error) {
 		console.error(error)
 	}
