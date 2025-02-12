@@ -1,8 +1,11 @@
 import { Dispatch, SetStateAction } from 'react'
 
+export type setIsLoading = Dispatch<SetStateAction<boolean>>
+export type setUpdateTasksList = Dispatch<SetStateAction<boolean>>
+
 export interface AddTaskProps {
-	setIsLoading: Dispatch<SetStateAction<boolean>>;
-	setUpdateTasksList: Dispatch<SetStateAction<boolean>>
+	setIsLoading: setIsLoading;
+	setUpdateTasksList: setUpdateTasksList
 }
 
 export interface ITask {
@@ -10,5 +13,3 @@ export interface ITask {
 	task: string;
 	comlpeted: boolean;
 }
-
-export type setIsLoading = (isLoading: boolean) => void
