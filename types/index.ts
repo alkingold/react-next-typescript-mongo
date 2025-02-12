@@ -9,3 +9,9 @@ export interface AddTaskProps {
 }
 
 export type ApiResponse<T> = T | null
+
+export type DeleteTaskRequestParams = {
+	params: Promise<{
+    id: string
+  }>
+}

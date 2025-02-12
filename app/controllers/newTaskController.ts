@@ -10,7 +10,7 @@ export const addTaskAction = async (request: Request) => {
     await connectToDB()
     const newTask = new Task( task )
 
-    console.log(await newTask.save())
+    await newTask.save()
 
     return NextResponse.json(
       newTask,
