@@ -8,7 +8,7 @@ export const addTaskAction = async (request: Request) => {
 
 	try {
     await connectToDB()
-    const newTask = new Task({ task })
+    const newTask = new Task( task )
 
     console.log(await newTask.save())
 

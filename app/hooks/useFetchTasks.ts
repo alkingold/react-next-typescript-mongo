@@ -18,7 +18,7 @@ export const useFetchTasks = () => {
       setTasks(data)
     } catch (error) {
       console.error(error)
-      setError('There was an error loading tasks')
+      setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
       setLoading(false)
     }
