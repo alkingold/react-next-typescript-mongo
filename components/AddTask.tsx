@@ -1,35 +1,28 @@
+import { useRef } from 'react'
+
 import { Flex, Input, Button } from '@chakra-ui/react'
-import { MdOutlineAddTask } from "react-icons/md";
+import { MdOutlineAddTask } from "react-icons/md"
 
 import { AddTaskProps } from '@types'
-import { useRef } from 'react';
+import { useCreateTask } from '../app/hooks/useCreateTask'
 
-const AddTask = ({ setIsLoading, setUpdateTasksList } : AddTaskProps) => {
-  const addTaskInputRef = useRef<HTMLInputElement>(null)
+const AddTask = ({reloadTasks}: AddTaskProps) => {
+  const addTaskInputRef = useRef<HTMLInputElement | null>(null)
+  const { addTask, loading, error } = useCreateTask(reloadTasks)
 
   const handleCreateTask = async () => {
-    setIsLoading(true)
-    const task = addTaskInputRef.current?.value
+    const taskName = addTaskInputRef.current?.value
 
-    if (task) {
-      try {
-        const response = await fetch("/api/task/new", {
-          method: 'POST',
-          body: JSON.stringify({
-            task
-          })
-        })
-        if (response.ok) {
-          setUpdateTasksList(true)
-        } else {
-          console.log('error')
-        }
-      } catch (error) {
-        console.error(error)
+    if (taskName) {
+      addTask(taskName)
+
+      if (
+        !error
+        && addTaskInputRef.current
+      ) {
+        addTaskInputRef.current.value = ''
       }
     }
-
-    setIsLoading(false)
   }
 
   return (
