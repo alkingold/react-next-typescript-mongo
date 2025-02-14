@@ -3,11 +3,12 @@ import { useRef } from 'react'
 import { Flex, Input, Button } from '@chakra-ui/react'
 import { MdOutlineAddTask } from "react-icons/md"
 
-import { AddTaskProps } from '@types'
 import { useCreateTask } from '../app/hooks/useCreateTask'
+import { useTaskContext } from '@context/TaskContext'
 
-const AddTask = ({reloadTasks}: AddTaskProps) => {
+const AddTask = () => {
   const addTaskInputRef = useRef<HTMLInputElement | null>(null)
+  const { reloadTasks } = useTaskContext()
   const { addTask, loading, error } = useCreateTask(reloadTasks)
 
   const handleCreateTask = async () => {

@@ -4,10 +4,6 @@ export interface ITask {
 	completed: boolean;
 }
 
-export interface AddTaskProps {
-	reloadTasks: () => void
-}
-
 export interface TaskProps {
 	task: ITask;
 }
@@ -22,4 +18,8 @@ export type DeleteTaskRequestParams = {
 	params: Promise<{
     id: string
   }>
+}
+
+export interface TaskContextType {
+  reloadTasks: () => void
 }
