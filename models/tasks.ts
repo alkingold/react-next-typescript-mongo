@@ -7,7 +7,7 @@ const taskSchema = new Schema<ITask>({
 		type: String,
 		required: [true, 'Task is required.']
 	},
-	comlpeted: {
+	completed: {
 		type: Boolean,
 		default: false
 	}
