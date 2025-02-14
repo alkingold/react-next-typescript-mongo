@@ -14,7 +14,7 @@ export const useCreateTask = (
     try {
       const newTask = await createTask({
         task: taskName,
-        comlpeted: false
+        completed: false
       })
       console.log('NEW TASK', newTask);
       reloadTasks()
