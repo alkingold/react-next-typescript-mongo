@@ -2,9 +2,14 @@ import { Card, Flex, Text, Badge, HStack, IconButton } from '@chakra-ui/react'
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import { RiDeleteBin2Line } from "react-icons/ri"
 
+import { useDeleteTask } from '@app/hooks/useDeleteTask'
+import { useTaskContext } from '@context/TaskContext'
+
 import { TaskProps } from '@types'
 
-const Task = ({ task: { task, completed }}: TaskProps) => {
+const Task = ({ task: { task, completed, _id }}: TaskProps) => {
+  const { reloadTasks } = useTaskContext()
+  const { removeTask, loading, error } = useDeleteTask(reloadTasks)
 
   return (
     <Card.Root
@@ -33,6 +38,7 @@ const Task = ({ task: { task, completed }}: TaskProps) => {
               size="sm"
               variant="surface"
               colorPalette="red"
+              onClick={() => removeTask(_id)}
             >
               <RiDeleteBin2Line />
             </IconButton>

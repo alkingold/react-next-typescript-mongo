@@ -19,3 +19,11 @@ export const createTask = async (task: Omit<ITask, "_id">): Promise<ApiResponse<
   if (!response.ok) throw new Error("Error creating task")
   return response.json()
 }
+
+export const deleteTask = async (id: string) => {
+  const response = await fetch(`api/task/delete/${id}`, {
+    method: 'DELETE'
+  })
+  if (!response.ok) throw new Error('Task could not be deleted')
+  return response.json()
+}
