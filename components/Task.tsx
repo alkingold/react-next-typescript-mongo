@@ -3,6 +3,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import { RiDeleteBin2Line } from "react-icons/ri"
 
 import { useDeleteTask } from '@app/hooks/useDeleteTask'
+import { useMarkTaskCompleted } from '@app/hooks/useMarkTaskCompleted'
 import { useTaskContext } from '@context/TaskContext'
 
 import { TaskProps } from '@types'
@@ -10,6 +11,7 @@ import { TaskProps } from '@types'
 const Task = ({ task: { task, completed, _id }}: TaskProps) => {
   const { reloadTasks } = useTaskContext()
   const { removeTask, loading, error } = useDeleteTask(reloadTasks)
+  const { markTaskCompleted } = useMarkTaskCompleted(reloadTasks)
 
   return (
     <Card.Root
@@ -31,6 +33,7 @@ const Task = ({ task: { task, completed, _id }}: TaskProps) => {
               mr="1em"
               colorPalette="green"
               disabled={ completed ? true : false }
+              onClick={() => markTaskCompleted(_id, completed)}
             >
               <IoMdCheckmarkCircleOutline size={50} />
             </IconButton>
@@ -43,7 +46,12 @@ const Task = ({ task: { task, completed, _id }}: TaskProps) => {
               <RiDeleteBin2Line />
             </IconButton>
           </Flex>
-          <Text color="gray.600">{task}</Text>
+          <Text
+            color="gray.600"
+            textDecoration={completed ? 'line-through' : 'auto'}
+          >
+            {task}
+          </Text>
           <Badge
             colorPalette={completed ? "green" : "yellow"}
             variant="surface"

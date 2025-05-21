@@ -16,7 +16,6 @@ export const useCreateTask = (
         task: taskName,
         completed: false
       })
-      console.log('NEW TASK', newTask);
       reloadTasks()
     } catch (error) {
       console.error(error)
