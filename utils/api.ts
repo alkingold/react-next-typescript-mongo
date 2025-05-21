@@ -27,3 +27,16 @@ export const deleteTask = async (id: string) => {
   if (!response.ok) throw new Error('Task could not be deleted')
   return response.json()
 }
+
+export const updateTask = async (
+  id: string,
+  data: { completed: boolean }
+) => {
+  const response = await fetch(`/api/task/update/${id}`, {
+    method: 'PATCH',
+    headers: API_HEADERS,
+    body: JSON.stringify(data)
+  })
+  if (!response.ok) throw new Error('Task could not be updated')
+  return response.json()
+}

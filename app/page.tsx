@@ -17,7 +17,7 @@ export default function Home() {
     <Container maxWidth="900px">
       <Header />
       <TaskProvider reloadTasks={reloadTasks}>
-        <AddTask reloadTasks={reloadTasks} />
+        <AddTask />
         <TasksList tasks={tasks} />
       </TaskProvider>
     </Container>
