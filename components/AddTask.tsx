@@ -27,7 +27,7 @@ const AddTask = () => {
   }
 
   return (
-    <Flex pt="2rem" pl="2rem" pr="2rem" pb="1rem">
+    <Flex pt="2rem" pb="1rem">
       <Input
         placeholder='New task...'
         ref={addTaskInputRef}
@@ -38,6 +38,7 @@ const AddTask = () => {
         colorScheme='twitter'
         size='lg'
         onClick={() => handleCreateTask()}
+        loading={loading}
       >
         <MdOutlineAddTask />
       </Button>

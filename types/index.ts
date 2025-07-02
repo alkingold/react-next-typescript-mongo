@@ -9,7 +9,9 @@ export interface TaskProps {
 }
 
 export interface TasksListProps {
-  tasks: ITask[];
+  tasks: ITask[] | null;
+  loading: boolean;
+  error: string | null;
 }
 
 export type ApiResponse<T> = T | null
@@ -27,5 +29,5 @@ export type EditTaskRequestParams = {
 }
 
 export interface TaskContextType {
-  reloadTasks: () => void
+  reloadTasks: () => void;
 }

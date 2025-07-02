@@ -5,7 +5,7 @@ import type { ITask } from "@types"
 import { fetchTasks } from '@utils/api'
 
 export const useFetchTasks = () => {
-	const [tasks, setTasks] = useState<ITask[]>([])
+  const [tasks, setTasks] = useState<ITask[] | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
