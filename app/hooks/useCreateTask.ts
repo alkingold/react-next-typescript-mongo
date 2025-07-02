@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { createTask } from "@utils/api"
+import { toaster } from "@components/ui/toaster"
 
 export const useCreateTask = (
   reloadTasks: () => void
@@ -17,13 +18,26 @@ export const useCreateTask = (
         completed: false
       })
       reloadTasks()
+      toaster.create({
+        title: 'Success',
+        description: 'Task successfully created',
+        type: 'success',
+        duration: 5000,
+      })
     } catch (error) {
       console.error(error)
-      setError(error instanceof Error ? error.message : "An error occurred")
+      const message = error instanceof Error ? error.message : 'An error occurred'
+      setError(message)
+      toaster.create({
+        title: 'Error',
+        description: message,
+        type: 'error',
+        duration: 5000,
+      })
     } finally {
       setLoading(false)
     }
   }
 
-	return { addTask, loading, error }
+  return { addTask, loading, error }
 }

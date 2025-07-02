@@ -6,7 +6,7 @@ import { connectToDB } from '@utils/database'
 export const addTaskAction = async (request: Request) => {
   const { task } = await request.json()
 
-	try {
+  try {
     await connectToDB()
     const newTask = new Task( task )
 
@@ -16,7 +16,7 @@ export const addTaskAction = async (request: Request) => {
       newTask,
       { status: 201 }
     )
-	} catch (error) {
+  } catch (error) {
     console.error(error)
     return NextResponse.json(
       "Failed to create a new task",

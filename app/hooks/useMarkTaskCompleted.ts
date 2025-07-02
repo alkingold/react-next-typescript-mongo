@@ -1,5 +1,6 @@
-import { updateTask } from '@utils/api'
 import { useState } from 'react'
+import { toaster } from '@components/ui/toaster'
+import { updateTask } from '@utils/api'
 
 export const useMarkTaskCompleted = (
   reloadTasks: () => void
@@ -14,9 +15,22 @@ export const useMarkTaskCompleted = (
     try {
       await updateTask(id, { completed: !currentValue })
       reloadTasks()
+      toaster.create({
+        title: 'Success',
+        description: 'Task successfully completed',
+        type: 'success',
+        duration: 5000,
+      })
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Error editing task')
+      const message = e instanceof Error ? e.message : 'Error editing task'
+      setError(message)
       console.error(e)
+      toaster.create({
+        title: 'Error',
+        description: message,
+        type: 'error',
+        duration: 5000,
+      })
     } finally {
       setLoading(false)
     }

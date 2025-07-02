@@ -1,4 +1,12 @@
-import { Card, Flex, Text, Badge, HStack, IconButton } from '@chakra-ui/react'
+import {
+  Card,
+  Flex,
+  Text,
+  Badge,
+  HStack,
+  IconButton,
+} from '@chakra-ui/react'
+
 import { IoMdCheckmarkCircleOutline } from "react-icons/io"
 import { RiDeleteBin2Line } from "react-icons/ri"
 
@@ -10,8 +18,18 @@ import { TaskProps } from '@types'
 
 const Task = ({ task: { task, completed, _id }}: TaskProps) => {
   const { reloadTasks } = useTaskContext()
-  const { removeTask, loading, error } = useDeleteTask(reloadTasks)
-  const { markTaskCompleted } = useMarkTaskCompleted(reloadTasks)
+  const {
+    removeTask,
+    loading: removeLoading,
+    error: removeError,
+  } = useDeleteTask(reloadTasks)
+  const {
+    markTaskCompleted,
+    loading: editLoading,
+    error: editError,
+  } = useMarkTaskCompleted(reloadTasks)
+
+  const handleClickCompleted = async () => markTaskCompleted(_id, completed)
 
   return (
     <Card.Root
@@ -32,8 +50,9 @@ const Task = ({ task: { task, completed, _id }}: TaskProps) => {
               size="sm"
               mr="1em"
               colorPalette="green"
-              disabled={ completed ? true : false }
-              onClick={() => markTaskCompleted(_id, completed)}
+              disabled={ completed }
+              onClick={handleClickCompleted}
+              loading={editLoading}
             >
               <IoMdCheckmarkCircleOutline size={50} />
             </IconButton>
@@ -42,6 +61,7 @@ const Task = ({ task: { task, completed, _id }}: TaskProps) => {
               variant="surface"
               colorPalette="red"
               onClick={() => removeTask(_id)}
+              loading={removeLoading}
             >
               <RiDeleteBin2Line />
             </IconButton>
